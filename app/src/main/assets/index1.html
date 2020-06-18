@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>voice recognize test</title>    
+    </head> 
+
+    <body>
+        <button onclick="record()">开始录音</button>
+        <script>
+        function record () {
+
+            navigator.mediaDevices.getUserMedia({
+                audio:true
+            }).then(mediaStream => {
+                console.log("begin")
+                console.log(mediaStream);
+                beginRecord(mediaStream);
+                
+            }).catch(err => {
+                // 如果用户电脑没有麦克风设备或者用户拒绝了，或者连接出问题了等
+                // 这里都会抛异常，并且通过err.name可以知道是哪种类型的错误 
+                console.error(err);
+            })  ;
+        }
+        </script>
+    
+    </body> 
+
+</html> 

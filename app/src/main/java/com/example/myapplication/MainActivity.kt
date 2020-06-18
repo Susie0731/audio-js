@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val myWebUrl: String = "file:///android_asset/index.html"
+        val myWebUrl: String = "file:///android_asset/index1.html"
        webView.loadUrl(myWebUrl)
     }
 
