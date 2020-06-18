@@ -16,25 +16,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val myWebUrl: String = "file:///android_asset/test.html"
+        val myWebUrl: String = "file:///android_asset/index.html"
        webView.loadUrl(myWebUrl)
     }
-    class MyWebViewClient internal constructor(private val activity: Activity) : WebViewClient() {
 
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest1?): Boolean {
-            val url: String = request?.url.toString();
-            view?.loadUrl(url)
-            return true
-        }
-
-        override fun shouldOverrideUrlLoading(webView: WebView, url: String): Boolean {
-            webView.loadUrl(url)
-            return true
-        }
-
-        override fun onReceivedError(view: WebView, request: WebResourceRequest1, error: WebResourceError) {
-            Toast.makeText(activity, "Got Error! $error", Toast.LENGTH_SHORT).show()
-        }
-    }
 }
