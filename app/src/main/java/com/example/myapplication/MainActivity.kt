@@ -9,8 +9,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val myWebUrl: String = "file:///android_asset/index1.html"
-        webView.postDelayed({ webView.loadUrl(myWebUrl) }, 500)
-//       webView.loadUrl(myWebUrl)
+//        webView.postDelayed({ webView.loadUrl(myWebUrl) }, 500)
+       webView.loadUrl(myWebUrl)
     }
 
 }

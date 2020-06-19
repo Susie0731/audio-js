@@ -8,6 +8,8 @@
     <body>
         <button onclick="record()">开始录音</button>
         <button onclick="stopRecord()">停止录音</button>
+        <!-- <audio id="audio-node"></audio> -->
+        <audio class="audio-node" autoplay></audio>
         <script>
         function record () {
 
@@ -41,12 +43,14 @@
         let leftDataList = [],
         rightDataList = [];
         function onAudioProcess (event) {
+            console.log(event.inputBuffer);
             let audioBuffer = event.inputBuffer;
             let leftChannelData = audioBuffer.getChannelData(0),
                 rightChannelData = audioBuffer.getChannelData(1);
             // 需要克隆一下
             leftDataList.push(leftChannelData.slice(0));
             rightDataList.push(rightChannelData.slice(0));
+            console.log(leftChannelData, rightChannelData);
         }
 
         function beginRecord (mediaStream) {
@@ -141,10 +145,22 @@
             }
         }
 
-        function playRecord (arrayBuffer) {
-            let blob = new Blob([new Uint8Array(arrayBuffer)]);
-            let blobUrl = URL.createObjectURL(blob);
-            document.querySelector('.audio-node').src = blobUrl;
+        function uploadRecord (arrayBuffer) {
+            // let blob = new Blob([new Uint8Array(arrayBuffer)]);
+            // let blobUrl = URL.createObjectURL(blob);
+            // var form=new FormData();
+		    // form.append("upfile",blob,"recorder.wav"); //和普通form表单并无二致，后端接收到upfile参数的文件，文件名为recorder.mp3
+            // //直接用ajax上传
+            // var xhr=new XMLHttpRequest();
+            // xhr.open("POST","http://127.0.0.1:3000/");//这个假地址在控制台network中能看到请求数据和格式，请求结果无关紧要
+            // xhr.onreadystatechange=function(){
+            //     if(xhr.readyState==4){
+            //         alert(xhr.status==200?"上传成功":"测试请先打开浏览器控制台，然后重新录音，在network选项卡里面就能看到上传请求数据和格式了");
+            //     }
+            // }
+            // xhr.send(form);
+            console.log("上传成功")
+            // document.querySelector('.audio-node').src = blobUrl;
         }
 
 
@@ -154,7 +170,9 @@
                 rightData = mergeArray(rightDataList);
             let allData = interleaveLeftAndRight(leftData, rightData);
             let wavBuffer = createWavFile(allData);
-            playRecord(wavBuffer);
+            uploadRecord(wavBuffer);
+            console.log(leftDataList, rightDataList);
+            console.log("finish stop");
         }
 
         </script>
